@@ -1,15 +1,12 @@
-public abstract class Animal{
+public class Person {
     private String name;
     private int age;
     private Gender gender;
 
-    private String color;
-
-    public Animal(String name, int age, Gender gender, String color) {
+    public Person(String name, int age, Gender gender) {
         this.name = name;
         this.age = age;
         this.gender = gender;
-        this.color = color;
     }
 
     public String getName() {
@@ -36,20 +33,12 @@ public abstract class Animal{
         this.gender = gender;
     }
 
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
     @Override
     public String toString() {
         if (this.gender == Gender.male) {
-            return name + " " + age + " " + "самец" + " " + color;
+            return name + " " + age + " " + "мужчина";
         } else {
-            return name + " " + age + " " + "самка" + " " + color;
+            return name + " " + age + " " + "женщина";
         }
     }
 }
