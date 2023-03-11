@@ -8,11 +8,15 @@ public class Main {
         Person sveta = new Person("Света", 25, Gender.female);
         Person petya = new Person("Петя", 33, Gender.male);
 
-        System.out.println(cat1);
-        System.out.println(cat2);
-        System.out.println(dog1);
-        System.out.println(dog2);
-        System.out.println(sveta);
-        System.out.println(petya);
+        petya.eat();
+        sveta.speak();
+
+        cat1.happinessLevel();
+        dog2.happinessLevel();
+
+        sveta.petAnimal(cat1);
+        petya.petAnimal(dog2);
+        sveta.petAnimal(cat1);
+        petya.petAnimal(dog2);
     }
 }

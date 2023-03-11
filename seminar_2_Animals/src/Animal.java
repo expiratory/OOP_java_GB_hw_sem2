@@ -5,6 +5,8 @@ public abstract class Animal{
 
     private String color;
 
+    private int happiness = 0;
+
     public Animal(String name, int age, Gender gender, String color) {
         this.name = name;
         this.age = age;
@@ -44,12 +46,30 @@ public abstract class Animal{
         this.color = color;
     }
 
+    public int getHappiness() {
+        return happiness;
+    }
+
+    public void setHappiness(int happiness) {
+        this.happiness = happiness;
+    }
+
     @Override
     public String toString() {
         if (this.gender == Gender.male) {
             return name + " " + age + " " + "самец" + " " + color;
         } else {
             return name + " " + age + " " + "самка" + " " + color;
+        }
+    }
+
+    public void happinessLevel() {
+        if (this.happiness == 0) {
+            System.out.println(this.name + " чувствует себя грустно");
+        } else if (this.happiness == 1) {
+            System.out.println(this.name + " чувствует себя нормально");
+        } else if (this.happiness >= 2) {
+            System.out.println(this.name + " чувствует себя счастливо");
         }
     }
 }
