@@ -18,5 +18,9 @@ public class Main {
         petya.petAnimal(dog2);
         sveta.petAnimal(cat1);
         petya.petAnimal(dog2);
+
+        petya.callAnimal(cat1);
+        cat1.answerToCall(petya);
+        dog2.answerToCall(petya);
     }
 }

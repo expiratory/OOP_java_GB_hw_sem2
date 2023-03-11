@@ -84,4 +84,9 @@ public class Person implements Eating, Speaking{
             animal.happinessLevel();
         }
     }
+
+    public void callAnimal(Animal animal) {
+        animal.setIsCalled(true);
+        System.out.println(this.name + " позвал " + animal.getName());
+    }
 }

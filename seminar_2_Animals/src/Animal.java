@@ -7,6 +7,8 @@ public abstract class Animal{
 
     private int happiness = 0;
 
+    private boolean isCalled = false;
+
     public Animal(String name, int age, Gender gender, String color) {
         this.name = name;
         this.age = age;
@@ -54,6 +56,14 @@ public abstract class Animal{
         this.happiness = happiness;
     }
 
+    public boolean getIsCalled() {
+        return isCalled;
+    }
+
+    public void setIsCalled(boolean isCalled) {
+        this.isCalled = isCalled;
+    }
+
     @Override
     public String toString() {
         if (this.gender == Gender.male) {
@@ -72,4 +82,6 @@ public abstract class Animal{
             System.out.println(this.name + " чувствует себя счастливо");
         }
     }
+
+    public abstract void answerToCall(Person person);
 }
