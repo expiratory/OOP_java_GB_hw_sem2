@@ -1,4 +1,4 @@
-public class Dog extends Animal implements Eating, Speaking{
+public class Dog extends Animal implements Eating, Speaking, Comparable{
 
     public Dog(String name, int age, Gender gender, String color) {
         super(name, age, gender, color);
@@ -21,5 +21,10 @@ public class Dog extends Animal implements Eating, Speaking{
     @Override
     public void speak() {
         System.out.println("Песик " + super.getName() + " гавкает");
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return super.getAge() - (((Dog) o).getAge());
     }
 }

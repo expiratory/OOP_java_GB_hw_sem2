@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Research {
+public class Research implements Printable{
     ArrayList<String> result = new ArrayList<>();
     ArrayList<Node> tree;
 
@@ -14,7 +14,12 @@ public class Research {
                 result.add(t.p2.getName());
             }
         }
+        print(result);
         return result;
     }
 
+    @Override
+    public void print(Object o) {
+        System.out.println(o);
+    }
 }

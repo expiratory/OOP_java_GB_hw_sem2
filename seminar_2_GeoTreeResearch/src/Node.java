@@ -1,4 +1,4 @@
-public class Node {
+public class Node{
 
     public Node(Person p1, Relationship re, Person p2) {
         this.p1 = p1;
@@ -14,5 +14,4 @@ public class Node {
     public String toString() {
         return String.format("<%s %s %s>", p1, re, p2);
     }
-
 }

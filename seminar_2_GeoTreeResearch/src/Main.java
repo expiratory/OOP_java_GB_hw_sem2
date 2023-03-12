@@ -1,3 +1,5 @@
+import java.util.Iterator;
+
 public class Main {
     public static void main(String[] args) {
         Person ivanovaIrina = new Person("Иванова Ирина", Gender.female, 80);
@@ -9,57 +11,49 @@ public class Main {
         Person ivanovaSveta = new Person("Иванова Света", Gender.female, 25);
         Person ivanovDima = new Person("Иванов Дима", Gender.male, 20);
 
-        IvanovsGeoTree ivanovsGT = new IvanovsGeoTree();
+        GeoTree gt = new GeoTree();
 
-        ivanovsGT.append(ivanovaIrina, Relationship.mother, ivanovPetya);
-        ivanovsGT.append(ivanovVasya, Relationship.father, ivanovPetya);
-        ivanovsGT.append(ivanovPetya, Relationship.son, ivanovaIrina);
-        ivanovsGT.append(ivanovPetya, Relationship.son, ivanovVasya);
+        gt.append(ivanovaIrina, Relationship.mother, ivanovPetya, Relationship.son);
+        gt.append(ivanovVasya, Relationship.father, ivanovPetya, Relationship.son);
 
-        ivanovsGT.append(ivanovaMasha, Relationship.mother, ivanovaZhenya);
-        ivanovsGT.append(ivanovVanya, Relationship.father, ivanovaZhenya);
-        ivanovsGT.append(ivanovaZhenya, Relationship.daughter, ivanovaMasha);
-        ivanovsGT.append(ivanovaZhenya, Relationship.daughter, ivanovVanya);
+        gt.append(ivanovaMasha, Relationship.mother, ivanovaZhenya, Relationship.daughter);
+        gt.append(ivanovVanya, Relationship.father, ivanovaZhenya, Relationship.daughter);
 
-        ivanovsGT.append(ivanovaZhenya, Relationship.mother, ivanovaSveta);
-        ivanovsGT.append(ivanovPetya, Relationship.father, ivanovaSveta);
-        ivanovsGT.append(ivanovaSveta, Relationship.daughter, ivanovPetya);
-        ivanovsGT.append(ivanovaSveta, Relationship.daughter, ivanovaZhenya);
+        gt.append(ivanovaZhenya, Relationship.mother, ivanovaSveta, Relationship.daughter);
+        gt.append(ivanovPetya, Relationship.father, ivanovaSveta, Relationship.daughter);
 
-        ivanovsGT.append(ivanovaZhenya, Relationship.mother, ivanovDima);
-        ivanovsGT.append(ivanovPetya, Relationship.father, ivanovDima);
-        ivanovsGT.append(ivanovDima, Relationship.son, ivanovPetya);
-        ivanovsGT.append(ivanovDima, Relationship.son, ivanovaZhenya);
+        gt.append(ivanovaZhenya, Relationship.mother, ivanovDima, Relationship.son);
+        gt.append(ivanovPetya, Relationship.father, ivanovDima, Relationship.son);
 
-        ivanovsGT.append(ivanovaIrina, Relationship.grandmother, ivanovaSveta);
-        ivanovsGT.append(ivanovaMasha, Relationship.grandmother, ivanovaSveta);
-        ivanovsGT.append(ivanovaIrina, Relationship.grandmother, ivanovDima);
-        ivanovsGT.append(ivanovaMasha, Relationship.grandmother, ivanovDima);
+        gt.append(ivanovaIrina, Relationship.grandmother, ivanovaSveta, Relationship.granddaughter);
+        gt.append(ivanovaMasha, Relationship.grandmother, ivanovaSveta, Relationship.granddaughter);
+        gt.append(ivanovaIrina, Relationship.grandmother, ivanovDima, Relationship.grandson);
+        gt.append(ivanovaMasha, Relationship.grandmother, ivanovDima, Relationship.grandson);
 
-        ivanovsGT.append(ivanovVasya, Relationship.grandfather, ivanovaSveta);
-        ivanovsGT.append(ivanovVanya, Relationship.grandfather, ivanovaSveta);
-        ivanovsGT.append(ivanovVasya, Relationship.grandfather, ivanovDima);
-        ivanovsGT.append(ivanovVanya, Relationship.grandfather, ivanovDima);
+        gt.append(ivanovVasya, Relationship.grandfather, ivanovaSveta, Relationship.granddaughter);
+        gt.append(ivanovVanya, Relationship.grandfather, ivanovaSveta, Relationship.granddaughter);
+        gt.append(ivanovVasya, Relationship.grandfather, ivanovDima, Relationship.grandson);
+        gt.append(ivanovVanya, Relationship.grandfather, ivanovDima, Relationship.grandson);
 
-        ivanovsGT.append(ivanovaSveta, Relationship.granddaughter, ivanovaIrina);
-        ivanovsGT.append(ivanovaSveta, Relationship.granddaughter, ivanovaMasha);
-        ivanovsGT.append(ivanovaSveta, Relationship.granddaughter, ivanovVasya);
-        ivanovsGT.append(ivanovaSveta, Relationship.granddaughter, ivanovVanya);
+        gt.append(ivanovDima, Relationship.brother, ivanovaSveta, Relationship.sister);
 
-        ivanovsGT.append(ivanovDima, Relationship.grandson, ivanovaIrina);
-        ivanovsGT.append(ivanovDima, Relationship.grandson, ivanovaMasha);
-        ivanovsGT.append(ivanovDima, Relationship.grandson, ivanovVasya);
-        ivanovsGT.append(ivanovDima, Relationship.grandson, ivanovVanya);
+        Research researchDimaSon = new Research(gt);
+        researchDimaSon.spend(ivanovDima, Relationship.son);
 
-        ivanovsGT.append(ivanovDima, Relationship.brother, ivanovaSveta);
-        ivanovsGT.append(ivanovaSveta, Relationship.sister, ivanovDima);
+        Research researchDimaGrandson = new Research(gt);
+        researchDimaGrandson.spend(ivanovDima, Relationship.grandson);
 
-        Research researchDimaSon = new Research(ivanovsGT);
-        System.out.println(researchDimaSon.spend(ivanovDima, Relationship.son));
+        System.out.println(ivanovaIrina.compareTo(ivanovDima));
 
-        Research researchDimaGrandson = new Research(ivanovsGT);
-        System.out.println(researchDimaGrandson.spend(ivanovDima, Relationship.grandson));
 
+        Iterator<Node> iterator = (gt.getTree()).iterator();
+        while (iterator.hasNext()) {
+            Node next = iterator.next();
+            if (next.re != Relationship.son) {
+                iterator.remove();
+            }
+        }
+        System.out.println(gt.getTree());
     }
 
 }

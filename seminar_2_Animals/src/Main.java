@@ -22,5 +22,7 @@ public class Main {
         petya.callAnimal(cat1);
         cat1.answerToCall(petya);
         dog2.answerToCall(petya);
+
+        System.out.println(dog1.compareTo(dog2));
     }
 }
